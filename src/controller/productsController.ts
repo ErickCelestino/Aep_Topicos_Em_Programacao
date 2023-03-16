@@ -1,6 +1,5 @@
 
 import { Request, Response } from 'express'
-import Product from '../schemas/Product'
 import productService from '../service/productService'
 
 
@@ -18,11 +17,12 @@ class productsController{
         }
     }
 
-    public async readJSON(res: Response){
+    public async readJSON(req: Request, res: Response){
         try{
             const readFiles = await productService.readProduct('products.json')
             const result = res.json(readFiles)
-            return result
+
+            return res.status(200).json(result)
 
         }catch(err){
             console.log('Erro: ',err)
@@ -32,19 +32,11 @@ class productsController{
 
     public async createStockJSON(req: Request, res: Response){
         try{
-            const readFiles = await productService.readProduct('products.json')
-            const resultStock = readFiles.map(
-                (item) => {
-                   for(let i = 0;i < item.length;i++){
-                        new Product({
-                            nome: item[i].nome,
-                            preco: parseFloat(item[i].preco),
-                            qtde: parseInt(item[i].qtde),
-                            valor_estoque: parseInt(item[i].qtde) * parseFloat(item[i].preco)
-                        })
-                   }
-                })
-            console.log(resultStock)
+           
+            const Stock = await productService.stockProduct('products.json')
+            console.log(Stock)
+            return res.status(200).json(Stock)
+
         }catch(err){
             console.log('Erro: ',err)
         }

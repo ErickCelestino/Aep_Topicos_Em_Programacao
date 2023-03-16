@@ -24,7 +24,22 @@ class ProductService {
 
     async stockProduct(data){
         try{
+            console.log('Estoque contado')
+            const readFiles = await readFile(`${data}`,'utf-8')
+       
+            let result = JSON.parse(readFiles)
             
+            let stock = result.map(item => {
+                let product_stock ={
+                    nome: item.nome,
+                    qtde: item.qtde,
+                    preco: item.preco,
+                    valor_estoque: item.qtde * item.preco
+                }   
+              return product_stock
+                }
+            )
+            return stock
         }catch(err){
             throw new Error('Falha na criação do estoque')
         }

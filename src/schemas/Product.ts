@@ -1,4 +1,3 @@
-import { Int32 } from 'mongodb'
 import { Schema, model, Document } from 'mongoose'
 
 const ProductSchema = new Schema({
