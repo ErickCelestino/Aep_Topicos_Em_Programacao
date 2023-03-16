@@ -8,7 +8,7 @@ class productsController{
     public async createJSON(req: Request, res: Response) {
       
         try{
-            console.log('Para fins didaticos: ',req)
+            //console.log('Para fins didaticos: ',req)
             productService.createProductList(req.body)
         
             return res.status(201).send()
@@ -20,9 +20,7 @@ class productsController{
     public async readJSON(req: Request, res: Response){
         try{
             const readFiles = await productService.readProduct()
-            const result = res.json(readFiles)
-
-            return res.status(200).json(result)
+            return res.status(200).json(readFiles)
 
         }catch(err){
             console.log('Erro: ',err)
@@ -34,7 +32,6 @@ class productsController{
         try{
            
             const Stock = await productService.stockProduct()
-            console.log(Stock)
             return res.status(200).json(Stock)
 
         }catch(err){
