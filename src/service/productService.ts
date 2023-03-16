@@ -4,17 +4,15 @@ class ProductService {
 
     async createProductList(data) {
         try{
-            console.log('Criando lista de produtos')
             await writeFile('products.json',JSON.stringify(data))
         }catch(err){
             throw new Error('Falha ao salvar a lista de produtos')
         }
     }
 
-    async readProduct(data){
+    async readProduct(){
         try{
-            console.log('Produto Lido')
-            const readFiles = await readFile(`${data}`,'utf-8')
+            const readFiles = await readFile('products.json','utf-8')
             let result = JSON.parse(readFiles)
             return result
         }catch(err){
@@ -22,10 +20,9 @@ class ProductService {
         }
     }
 
-    async stockProduct(data){
+    async stockProduct(){
         try{
-            console.log('Estoque contado')
-            const readFiles = await readFile(`${data}`,'utf-8')
+            const readFiles = await readFile('products.json','utf-8')
        
             let result = JSON.parse(readFiles)
             
