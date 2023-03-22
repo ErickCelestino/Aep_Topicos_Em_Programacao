@@ -1,4 +1,4 @@
-import {writeFile,readFile} from 'fs/promises'
+import {writeFile,readFile, } from 'fs/promises'
 
 class ProductService {
 
@@ -41,6 +41,16 @@ class ProductService {
             throw new Error('Falha na criação do estoque')
         }
 
+    }
+
+    async getStockValue(){
+        
+        const stockProduct = await this.stockProduct()
+
+        let stockValue = stockProduct.reduce((acumudador,preco) => {
+            return acumudador + preco.value.valor_estoque
+        },0)
+        return stockProduct
     }
 }
 

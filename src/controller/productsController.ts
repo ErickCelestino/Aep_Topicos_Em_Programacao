@@ -39,6 +39,8 @@ class productsController{
         }
     }
 
+    
+
 }
 
 export default new productsController()
